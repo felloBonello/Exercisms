@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"HelloWorldTest::testHelloWorld":0.002}}
+{"version":1,"defects":[],"times":{"HelloWorldTest::testHelloWorld":0.002,"ResistorColorTest::testColors":0.008,"ResistorColorTest::testBlackColorCode":0,"ResistorColorTest::testOrangeColorCode":0,"ResistorColorTest::testWhiteColorCode":0}}
