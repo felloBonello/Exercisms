@@ -39,7 +39,6 @@ class HighScores
         $this->personalBest = end($scores);
         $this->personalTopThree = array_splice($scores, -3);
         rsort($this->personalTopThree);
-
     }
 
 }
