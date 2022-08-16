@@ -17,6 +17,7 @@ export class ComputeCell {
   constructor(inputCells, fn) {
     this.fn = fn;
     this.inputCells = inputCells;
+    this.cachedValue = this.value;
   }
 
   get value() {
@@ -39,7 +40,10 @@ export class CallbackCell {
   }
 
   get values() {
-    this.computeCells.forEach((item) => this.fn(item));
+    this.computeCells.forEach((item) => {
+      this.value =
+        this.fn(item) !== item.cachedValue ? this.fn(item) : item.cachedValue;
+    });
     return this.computeCells.map((item) => item.value);
   }
 }
