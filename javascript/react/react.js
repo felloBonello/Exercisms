@@ -5,30 +5,44 @@
 
 export class InputCell {
   constructor(value) {
+    this.target = new EventTarget();
     this.setValue(value);
   }
 
   setValue(value) {
     this.value = value;
+    this.target.dispatchEvent(new Event('updateEvent'));
   }
 }
 
 export class ComputeCell {
+
   constructor(inputCells, fn) {
     this.fn = fn;
+    this.target = new EventTarget();
     this.inputCells = inputCells;
+    this.inputCells.forEach((cell) =>
+      cell.target.addEventListener('updateEvent', (event) => {
+        this.updateValue();
+      })
+    )
+    this.updateValue();
   }
 
-  get value() {
-    return this.fn(this.inputCells);
+  updateValue(){
+    const oldValue = this.value;
+    this.value = this.fn(this.inputCells);
+    if(oldValue !== this.value){
+      this.target.dispatchEvent(new Event('updateEvent'));
+    }
   }
 
   addCallback(cb) {
-    cb.computeCells.push(this);
+    cb.addComputeCell(this);
   }
 
   removeCallback(cb) {
-    throw new Error("Remove this statement and implement this function");
+    cb.removeComputeCell(this);
   }
 }
 
@@ -36,9 +50,21 @@ export class CallbackCell {
   constructor(fn) {
     this.fn = fn;
     this.computeCells = [];
+    this.updateValues()
   }
 
-  get values() {
-    return this.computeCells.map((item) => this.fn(item));
+  updateValues = () => {
+    this.values = this.computeCells.map((item) => this.fn(item));
+  }
+
+  addComputeCell(cc) {
+    cc.target.addEventListener('updateEvent', this.updateValues)
+    this.computeCells.push(cc);
+  }
+
+  removeComputeCell(cc) {
+    cc.target.removeEventListener('updateEvent', this.updateValues)
+    const i = this.computeCells.indexOf(cc)
+    this.computeCells.splice(i, 1);
   }
 }
