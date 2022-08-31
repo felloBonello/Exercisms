@@ -4,14 +4,28 @@
 //
 
 export function triplets({ minFactor, maxFactor, sum }) {
-  switch (sum) {
-    case 12:
-      return [new Triplet(3, 4, 5)];
-      break;
-    case 108:
-      return [new Triplet(27, 36, 45)];
-      break;
+  const maxC = Math.floor(sum / 2) - 1;
+  let results = [];
+  //a**2 + b**2 = 9 + 16 = 25 = c**2.
+  // loop
+  for (let a = 1; a < maxC; a++) {
+    for (let b = 2; b < maxC; b++) {
+      let c = Math.sqrt(a * a + b * b);
+      if (a < b < c && a + b + c === sum) {
+        results = [new Triplet(a, b, c)];
+      }
+    }
   }
+  return results;
+  // for (let c = 1; c < maxC; c++) {
+  //   for (let b = 1; b < c; b++) {
+  //     for (let a = 1; a < b; a++) {
+  //       if (a + b + c == sum) {
+  //         return [new Triplet(a, b, c)];
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 class Triplet {

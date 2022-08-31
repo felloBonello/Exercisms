@@ -15,11 +15,11 @@ describe("Triplet", () => {
     expect(tripletsWithSum(108)).toEqual([[27, 36, 45]]);
   });
 
-  xtest("triplets whose sum is 1000", () => {
+  test("triplets whose sum is 1000", () => {
     expect(tripletsWithSum(1000)).toEqual([[200, 375, 425]]);
   });
 
-  xtest("no matching triplets for 1001", () => {
+  test("no matching triplets for 1001", () => {
     expect(tripletsWithSum(1001)).toEqual([]);
   });
 
