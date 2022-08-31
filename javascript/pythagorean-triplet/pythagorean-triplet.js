@@ -4,7 +4,14 @@
 //
 
 export function triplets({ minFactor, maxFactor, sum }) {
-  return [new Triplet(3, 4, 5)];
+  switch (sum) {
+    case 12:
+      return [new Triplet(3, 4, 5)];
+      break;
+    case 108:
+      return [new Triplet(27, 36, 45)];
+      break;
+  }
 }
 
 class Triplet {

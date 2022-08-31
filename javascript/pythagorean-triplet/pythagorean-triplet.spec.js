@@ -11,7 +11,7 @@ describe("Triplet", () => {
     expect(tripletsWithSum(12)).toEqual([[3, 4, 5]]);
   });
 
-  xtest("triplets whose sum is 108", () => {
+  test("triplets whose sum is 108", () => {
     expect(tripletsWithSum(108)).toEqual([[27, 36, 45]]);
   });
 
