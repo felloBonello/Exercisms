@@ -23,14 +23,14 @@ describe("Triplet", () => {
     expect(tripletsWithSum(1001)).toEqual([]);
   });
 
-  xtest("returns all matching triplets", () => {
+  test("returns all matching triplets", () => {
     expect(tripletsWithSum(90)).toEqual([
       [9, 40, 41],
       [15, 36, 39],
     ]);
   });
 
-  xtest("several matching triplets", () => {
+  test("several matching triplets", () => {
     expect(tripletsWithSum(840)).toEqual([
       [40, 399, 401],
       [56, 390, 394],
@@ -43,7 +43,7 @@ describe("Triplet", () => {
     ]);
   });
 
-  xtest("returns triplets with no factor smaller than minimum factor", () => {
+  test("returns triplets with no factor smaller than minimum factor", () => {
     expect(tripletsWithSum(90, { minFactor: 10 })).toEqual([[15, 36, 39]]);
   });
 

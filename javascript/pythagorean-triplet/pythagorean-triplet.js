@@ -8,14 +8,15 @@ export function triplets({ minFactor, maxFactor, sum }) {
   let results = [];
   //a**2 + b**2 = 9 + 16 = 25 = c**2.
   // loop
-  for (let a = 1; a < maxC; a++) {
-    for (let b = 2; b < maxC; b++) {
+  for (let b = maxC; b > 2; b--) {
+    for (let a = 1; a < b; a++) {
       let c = Math.sqrt(a * a + b * b);
       if (a < b < c && a + b + c === sum) {
-        results = [new Triplet(a, b, c)];
+        results.push(new Triplet(a, b, c));
       }
     }
   }
+  console.log(results);
   return results;
   // for (let c = 1; c < maxC; c++) {
   //   for (let b = 1; b < c; b++) {
