@@ -3,30 +3,22 @@
 // convenience to get you started writing code faster.
 //
 
-export function triplets({ minFactor, maxFactor, sum }) {
+export function triplets({ minFactor = 1, maxFactor = null, sum }) {
   const maxC = Math.floor(sum / 2) - 1;
   let results = [];
-  //a**2 + b**2 = 9 + 16 = 25 = c**2.
-  // loop
-  for (let b = maxC; b > 2; b--) {
-    for (let a = 1; a < b; a++) {
-      let c = Math.sqrt(a * a + b * b);
-      if (a < b < c && a + b + c === sum) {
+  maxFactor = maxFactor ?? maxC;
+
+  for (let b = maxFactor; minFactor <= b; b--) {
+    for (let a = minFactor + 1; a < b; a++) {
+      const c = Math.sqrt(a * a + b * b);
+
+      if (a < b < c && a + b + c === sum && minFactor <= c && c <= maxFactor) {
         results.push(new Triplet(a, b, c));
       }
     }
   }
-  console.log(results);
+
   return results;
-  // for (let c = 1; c < maxC; c++) {
-  //   for (let b = 1; b < c; b++) {
-  //     for (let a = 1; a < b; a++) {
-  //       if (a + b + c == sum) {
-  //         return [new Triplet(a, b, c)];
-  //       }
-  //     }
-  //   }
-  // }
 }
 
 class Triplet {

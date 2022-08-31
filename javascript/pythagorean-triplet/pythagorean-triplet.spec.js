@@ -47,11 +47,11 @@ describe("Triplet", () => {
     expect(tripletsWithSum(90, { minFactor: 10 })).toEqual([[15, 36, 39]]);
   });
 
-  xtest("returns triplets with no factor larger than maximum factor", () => {
+  test("returns triplets with no factor larger than maximum factor", () => {
     expect(tripletsWithSum(840, { maxFactor: 349 })).toEqual([[240, 252, 348]]);
   });
 
-  xtest("returns triplets with factors in range", () => {
+  test("returns triplets with factors in range", () => {
     expect(tripletsWithSum(840, { maxFactor: 352, minFactor: 150 })).toEqual([
       [210, 280, 350],
       [240, 252, 348],
@@ -60,7 +60,7 @@ describe("Triplet", () => {
 
   // This test doesn't run on our online test runner because it will time-out
   // with most implementations. It's up to you to test your solution locally.
-  test.skip(
+  test(
     "triplets for large number",
     () => {
       expect(tripletsWithSum(30000)).toEqual([
