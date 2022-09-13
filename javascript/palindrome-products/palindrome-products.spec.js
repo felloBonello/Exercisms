@@ -10,7 +10,7 @@ describe('Palindromes', () => {
     expect(sortFactors(smallest.factors)).toEqual(expected.factors);
   });
 
-  test('largest palindrome from single digit factors', () => {
+  xtest('largest palindrome from single digit factors', () => {
     const palindromes = Palindromes.generate({ maxFactor: 9, minFactor: 1 });
     const largest = palindromes.largest;
     const expected = {

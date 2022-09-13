@@ -6,6 +6,9 @@
 export class Palindromes {
 
   static generate(range) {
+    if (range.minFactor > range.maxFactor){
+      throw new Error('min must be <= max');
+    }
 
     this.smallest = {value: null, factors: []}
     this.largest = {value: null, factors: []}
@@ -15,18 +18,8 @@ export class Palindromes {
         const product = x * y;
 
         if(this.isPalindrome(product)){
-          if(this.smallest.value === null || product < this.smallest.value) {
-            this.smallest = {value: product, factors: [x, y] }
-          }
-          if(this.smallest.value === product){
-            this.smallest.factors.push([x, y])
-          }
-          if(this.largest.value === null || product > this.largest.value) {
-            this.largest = {value: product, factors: [x, y] }
-          }
-          if(this.largest.value === product){
-            this.largest.factors.push([x, y])
-          }
+          this.setSmallest(product, x, y);
+          this.setLargest(product, x, y);
         }
       }
     }
@@ -34,8 +27,25 @@ export class Palindromes {
     return this;
   }
 
+  static setSmallest(product, x, y) {
+    if (this.smallest.value === product) {
+      this.smallest.factors.push([x, y])
+    } else if (this.smallest.value === null || product < this.smallest.value) {
+      this.smallest = {value: product, factors: [[x, y]]}
+    }
+  }
+
+  static setLargest(product, x, y) {
+    if (this.largest.value === product) {
+      this.largest.factors.push([x, y])
+    } else if (this.largest.value === null || product > this.largest.value) {
+      this.largest = {value: product, factors: [[x, y]]}
+    }
+  }
+
   static isPalindrome(subject) {
-    const subjectString = subject.toString().split('');
-    return  subjectString === subjectString.reverse();
+    const subjectString = subject.toString();
+    const subjectStringReverse = subjectString.split('').reverse().join('');
+    return subjectString === subjectStringReverse;
   }
 }
